@@ -17,7 +17,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const notionData = response.results;
     // ... your logic to work with the data ...
 
-    res.setHeader("Content-Type", "application/json"); // Set header for JSON content
+    res.setHeader("Content-Type", "application/json");
+    res.setHeader("Access-Control-Allow-Origin", "*");
     return res.status(200).send(JSON.stringify(notionData, null, 2));
   } catch (error) {
     console.error(error);
