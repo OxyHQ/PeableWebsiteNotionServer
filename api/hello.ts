@@ -16,11 +16,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     // Process the Notion data
     const notionData = response.results;
-    // ... your logic to work with the data ...
+
+    // Send the Notion data as a JSON response
+    const filteredData = notionData.map((item: any) => {
+      return {
+        id: item.id,
+        title: item.properties.Title.title[0].plain_text,
+        category: item.properties.Category.select.name,
+      };
+    });
 
     res.setHeader("Content-Type", "application/json");
     res.setHeader("Access-Control-Allow-Origin", "*");
-    return res.status(200).send(JSON.stringify(notionData, null, 2));
+    return res.status(200).send(JSON.stringify(filteredData, null, 2));
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: "Error fetching Notion data" });
