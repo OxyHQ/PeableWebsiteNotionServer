@@ -21,11 +21,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const filteredData = notionData.map((item: any) => {
       return {
         id: item.id,
-        slug: item.properties.Slug.formula.string,
-        title: item.properties.Title.title[0].plain_text,
+        slug: item.properties.Slug?.formula?.string,
+        title: item.properties.Title?.title[0]?.plain_text,
         date: item.created_time,
-        icon: item.icon.emoji,
-        categories: item.properties.Category.multi_select.map(
+        icon: item.icon?.emoji,
+        categories: item.properties.Category?.multi_select?.map(
           (category: any) => {
             return {
               name: category.name,
@@ -33,6 +33,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             };
           }
         ),
+        featuredImage: item.properties["Featured Image"]?.files[0]?.file.url,
       };
     });
 
