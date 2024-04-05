@@ -15,7 +15,7 @@ Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_mediu
 ### Clone and Deploy
 
 ```bash
-git clone https://github.com/vercel/examples/tree/main/solutions/node-hello-world
+git clone https://github.com/PeableOfficial/PeableWebsiteNotionServer
 ```
 
 Install the Vercel CLI:
