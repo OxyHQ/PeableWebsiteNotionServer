@@ -11,6 +11,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Retrieve data from your Notion database
     const response = await notion.databases.query({
       database_id: "5ccf9e058fc74c6d81127991f0307b5b",
+      filter_properties: ["title", "tD%60A"],
     });
 
     // Process the Notion data
