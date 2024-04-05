@@ -11,7 +11,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Retrieve data from your Notion database
     const response = await notion.databases.query({
       database_id: "5ccf9e058fc74c6d81127991f0307b5b",
-      filter_properties: ["title", "tD%60A"],
+      filter_properties: ["title", "tD%60A", "Zw%3AK", "otfg"],
     });
 
     // Process the Notion data
@@ -21,8 +21,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const filteredData = notionData.map((item: any) => {
       return {
         id: item.id,
+        slug: item.properties.Slug.formula.string,
         title: item.properties.Title.title[0].plain_text,
-        category: item.properties.Category.select.name,
+        date: item.created_time,
+        icon: item.icon.emoji,
+        categories: item.properties.Category.multi_select.map(
+          (category: any) => {
+            return {
+              name: category.name,
+              color: category.color,
+            };
+          }
+        ),
       };
     });
 
