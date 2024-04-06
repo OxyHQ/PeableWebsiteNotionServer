@@ -37,7 +37,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
 
     const mdblocks = await n2m.pageToMarkdown(response.results[0].id);
-    const notionData = n2m.toMarkdownString(mdblocks);
+    const notionData = {
+      title: response.results[0].properties.Title.title[0].plain_text,
+      content: n2m.toMarkdownString(mdblocks).parent,
+    };
 
     res.setHeader("Content-Type", "application/json");
     res.setHeader("Access-Control-Allow-Origin", "*");
