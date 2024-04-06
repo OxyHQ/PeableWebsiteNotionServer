@@ -33,7 +33,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         id: item.id,
         slug: item.properties.Slug?.formula?.string,
         title: item.properties.Title?.title[0]?.plain_text,
-        date: item.properties["Published Date"]?.date?.start,
+        date: {
+          default: item.properties["Published Date"]?.date?.start,
+          formatted: new Date(
+            item.properties["Published Date"]?.date?.start
+          ).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          }),
+        },
         icon: item.icon?.emoji,
         categories: item.properties.Category?.multi_select?.map(
           (category: any) => {
