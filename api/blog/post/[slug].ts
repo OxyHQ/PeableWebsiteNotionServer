@@ -17,7 +17,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           {
             property: "Slug",
             rich_text: {
-              contains: req.query.slug as string,
+              equals: req.query.slug as string,
             },
           },
           {
