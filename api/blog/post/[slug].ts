@@ -40,6 +40,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const notionData = {
       title: response.results[0].properties.Title.title[0].plain_text,
       content: n2m.toMarkdownString(mdblocks).parent,
+      date: {
+        default: response.results[0].properties["Published Date"].date.start,
+        formatted: new Date(
+          response.results[0].properties["Published Date"].date.start
+        ).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        }),
+      },
     };
 
     res.setHeader("Content-Type", "application/json");
