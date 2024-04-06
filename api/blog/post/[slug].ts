@@ -9,6 +9,25 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       auth: process.env.NOTION_API_KEY, // Store API key securely
     });
 
+    const response = await notion.databases.query({
+      database_id: "5ccf9e058fc74c6d81127991f0307b5b",
+      filter_properties: ["title", "tD%60A", "Zw%3AK", "otfg", "yCn%40"],
+      filter: {
+        and: [
+          {
+            property: "Slug",
+            rich_text: {
+              contains: req.query.slug as string,
+            },
+          },
+          {
+            property: "Published Date",
+            date: { before: new Date().toISOString() },
+          },
+        ],
+      },
+    });
+
     // passing notion client to the option
     const n2m = new NotionToMarkdown({
       notionClient: notion,
@@ -17,7 +36,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       },
     });
 
-    const mdblocks = await n2m.pageToMarkdown(req.query.slug as string);
+    const mdblocks = await n2m.pageToMarkdown(response.results[0].id);
     const notionData = n2m.toMarkdownString(mdblocks);
 
     res.setHeader("Content-Type", "application/json");
