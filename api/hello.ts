@@ -12,6 +12,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const response = await notion.databases.query({
       database_id: "5ccf9e058fc74c6d81127991f0307b5b",
       filter_properties: ["title", "tD%60A", "Zw%3AK", "otfg", "yCn%40"],
+      filter: {
+        property: "Published Date",
+        date: { before: new Date().toISOString() },
+      },
+      sorts: [
+        {
+          property: "Published Date",
+          direction: "descending",
+        },
+      ],
     });
 
     // Process the Notion data
@@ -23,7 +33,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         id: item.id,
         slug: item.properties.Slug?.formula?.string,
         title: item.properties.Title?.title[0]?.plain_text,
-        date: item.properties.["Published Date"]?.date?.start,
+        date: item.properties["Published Date"]?.date?.start,
         icon: item.icon?.emoji,
         categories: item.properties.Category?.multi_select?.map(
           (category: any) => {
