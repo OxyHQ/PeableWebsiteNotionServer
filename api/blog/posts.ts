@@ -34,10 +34,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         slug: item.properties.Slug?.formula?.string,
         title: item.properties.Title?.title[0]?.plain_text,
         date: {
-          default: item.properties["Published Date"]?.date?.start,
+          default: item.properties?.["Published Date"]?.date?.start,
           formatted: new Date(
-            item.properties["Published Date"]?.date?.start
-          ).toLocaleDateString("en-US", {
+            item.properties?.["Published Date"]?.date?.start
+          )?.toLocaleDateString("en-US", {
             year: "numeric",
             month: "long",
             day: "numeric",
