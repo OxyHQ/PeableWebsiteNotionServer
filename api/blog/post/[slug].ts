@@ -40,6 +40,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const notionData = {
       title: response.results[0]?.properties?.Title?.title[0]?.plain_text,
       content: n2m.toMarkdownString(mdblocks)?.parent,
+      image:
+        response.results[0]?.properties?.["Featured Image"]?.files[0]?.file
+          ?.url,
       date: {
         default:
           response.results[0]?.properties?.["Published Date"]?.date?.start,
