@@ -38,24 +38,24 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const mdblocks = await n2m.pageToMarkdown(response.results[0].id);
     const notionData = {
-      title: response.results[0].properties.Title.title[0].plain_text,
-      content: n2m.toMarkdownString(mdblocks).parent,
-      image: response.results[0].properties["Featured Image"].files[0].file.url,
+      title: response.results[0]?.properties?.Title?.title[0]?.plain_text,
+      content: n2m.toMarkdownString(mdblocks)?.parent,
       date: {
-        default: response.results[0].properties["Published Date"].date.start,
+        default:
+          response.results[0]?.properties?.["Published Date"]?.date?.start,
         formatted: new Date(
-          response.results[0].properties["Published Date"].date.start
-        ).toLocaleDateString("en-US", {
+          response.results[0]?.properties?.["Published Date"]?.date?.start
+        )?.toLocaleDateString("en-US", {
           year: "numeric",
           month: "long",
           day: "numeric",
         }),
       },
-      categories: response.results[0].properties.Category.multi_select.map(
+      categories: response.results[0]?.properties?.Category?.multi_select?.map(
         (category: any) => {
           return {
-            name: category.name,
-            color: category.color,
+            name: category?.name,
+            color: category?.color,
           };
         }
       ),
