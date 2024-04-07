@@ -43,6 +43,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       image:
         response.results[0]?.properties?.["Featured Image"]?.files[0]?.file
           ?.url,
+      featuredImage:
+        response.results[0]?.properties?.["Featured Image"]?.files[0]?.file
+          ?.url,
       date: {
         default:
           response.results[0]?.properties?.["Published Date"]?.date?.start,
