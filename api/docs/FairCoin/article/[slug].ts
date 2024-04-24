@@ -23,7 +23,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const mdblocks = await n2m.pageToMarkdown(response.results[0].id);
     const notionData = {
-      title: response.results[0]?.properties?.Title?.title[0]?.plain_text,
+      title: response.results[0]?.properties.Page.title[0].plain_text,
       content: n2m.toMarkdownString(mdblocks)?.parent,
       date: {
         default: response.results[0]?.properties?.["Date"]?.date?.start,
