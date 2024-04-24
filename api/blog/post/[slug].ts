@@ -21,7 +21,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             },
           },
           {
-            property: "Published Date",
+            property: "Date",
             date: { before: new Date().toISOString() },
           },
         ],
