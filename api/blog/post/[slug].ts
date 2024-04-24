@@ -47,10 +47,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         response.results[0]?.properties?.["Featured Image"]?.files[0]?.file
           ?.url,
       date: {
-        default:
-          response.results[0]?.properties?.["Published Date"]?.date?.start,
+        default: response.results[0]?.properties?.["Date"]?.date?.start,
         formatted: new Date(
-          response.results[0]?.properties?.["Published Date"]?.date?.start
+          response.results[0]?.properties?.["Date"]?.date?.start
         )?.toLocaleDateString("en-US", {
           year: "numeric",
           month: "long",

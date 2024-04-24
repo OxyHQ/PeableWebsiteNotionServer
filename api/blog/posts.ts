@@ -13,12 +13,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       database_id: "5ccf9e058fc74c6d81127991f0307b5b",
       filter_properties: ["title", "tD%60A", "Zw%3AK", "otfg", "yCn%40"],
       filter: {
-        property: "Published Date",
+        property: "Date",
         date: { before: new Date().toISOString() },
       },
       sorts: [
         {
-          property: "Published Date",
+          property: "Date",
           direction: "descending",
         },
       ],
@@ -34,9 +34,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         slug: item.properties.Slug?.formula?.string,
         title: item.properties.Title?.title[0]?.plain_text,
         date: {
-          default: item.properties?.["Published Date"]?.date?.start,
+          default: item.properties?.["Date"]?.date?.start,
           formatted: new Date(
-            item.properties?.["Published Date"]?.date?.start
+            item.properties?.["Date"]?.date?.start
           )?.toLocaleDateString("en-US", {
             year: "numeric",
             month: "long",
