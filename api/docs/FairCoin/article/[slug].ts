@@ -11,6 +11,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const response = await notion.databases.query({
       database_id: "23883c6d64594d1ebe74f385eda2f554",
+      filter: {
+        and: [
+          {
+            property: "Slug",
+            rich_text: {
+              equals: req.query.slug as string,
+            },
+          },
+        ],
+      },
     });
 
     // passing notion client to the option
