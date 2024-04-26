@@ -10,7 +10,7 @@ function getTimeBasedPrice(amplitude, period, offset) {
 // Example usage:
 const amplitude = 2; // Price variation range
 const period = 60000; // One full cycle every minute (milliseconds)
-const offset = 5; // Base price
+const offset = 1; // Base price
 
 const currentPrice = getTimeBasedPrice(amplitude, period, offset);
 
