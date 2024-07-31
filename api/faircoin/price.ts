@@ -21,7 +21,7 @@ const variationFactor = 1; // Adjust for desired price variation
 const price = getMinuteBasedRandomPrice(basePrice, variationFactor);
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  res.setHeader("Content-Type", "application/json");
-  res.setHeader("Access-Control-Allow-Origin", "https://fairco.in");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Access-Control-Allow-Origin", "*");
   return res.status(200).send(JSON.stringify({ price: price }, null, 2));
 }
