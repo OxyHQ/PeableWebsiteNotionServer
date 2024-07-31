@@ -22,7 +22,6 @@ const price = getMinuteBasedRandomPrice(basePrice, variationFactor);
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader("Content-Type", "application/json");
-  res.setHeader("Access-Control-Allow-Methods", "GET, PUT, DELETE, OPTIONS");
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", "https://fairco.in/");
   return res.status(200).send(JSON.stringify({ price: price }, null, 2));
 }
